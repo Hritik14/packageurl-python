@@ -255,6 +255,20 @@ def build_golang_repo_url(purl):
         return f"https://pkg.go.dev/{namespace}/{name}"
 
 
+@repo_router.route("pkg:maven/.*")
+def build_maven_repo_url(purl):
+    """
+    Return a maven repo URL from the `purl` string.
+    """
+    purl_data = PackageURL.from_string(purl)
+
+    namespace = purl_data.namespace
+    name = purl_data.name
+    version = purl_data.version
+
+    return f"https://central.sonatype.com/artifact/{namespace}/{name}/{version}"
+
+
 # Download URLs:
 
 
